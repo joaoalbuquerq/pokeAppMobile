@@ -1,26 +1,30 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Pokémon List</ion-title>
+    <ion-title>Todos os Pokémons</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
+  <!-- Campo de busca -->
+  <ion-item>
+    <ion-input
+      placeholder="Filtrar por nome"
+      [(ngModel)]="filtroNome"
+      clearInput
+    ></ion-input>
+  </ion-item>
+
+  <!-- Grid de cards -->
   <div class="grid">
-    <ion-card *ngFor="let pokemon of pokemons">
+    <ion-card *ngFor="let pokemon of pokemonsFiltrados">
       <ion-card-header>
         <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <img [src]="pokemon.image" alt="{{ pokemon.name }}">
-        
       </ion-card-content>
     </ion-card>
-  </div>
-
-  <div class="pagination-buttons">
-    <ion-button [disabled]="offset === 0" (click)="voltar()">Anterior</ion-button>
-    <ion-button [disabled]="offset + limit >= totalPokemons" (click)="avancar()">Próxima</ion-button>
   </div>
 
 </ion-content>

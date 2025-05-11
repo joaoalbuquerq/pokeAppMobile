@@ -13,6 +13,7 @@ export class Tab3Page {
   limit = 9;
   offset = 0;
   totalPokemons = 1302;
+  filtroNome: string = '';
 
   constructor(private http: HttpClient) {}
 
@@ -21,7 +22,7 @@ export class Tab3Page {
   }
 
   loadPokemons() {
-    const url = `https://pokeapi.co/api/v2/pokemon?limit=${this.limit}&offset=${this.offset}`;
+    const url = `https://pokeapi.co/api/v2/pokemon?limit=${this.totalPokemons}`;
     this.http.get<any>(url).subscribe(response => {
       this.pokemons = response.results.map((pokemon: any) => {
         const id = pokemon.url.split('/').filter(Boolean).pop();
@@ -33,17 +34,11 @@ export class Tab3Page {
     });
   }
 
-  avancar() {
-    if (this.offset + this.limit < this.totalPokemons) {
-      this.offset += this.limit;
-      this.loadPokemons();
-    }
-  }
 
-  voltar() {
-    if (this.offset >= this.limit) {
-      this.offset -= this.limit;
-      this.loadPokemons();
-    }
+  get pokemonsFiltrados() {
+    if (!this.filtroNome) return this.pokemons;
+    return this.pokemons.filter(p =>
+      p.name.toLowerCase().includes(this.filtroNome.toLowerCase())
+    );
   }
 }

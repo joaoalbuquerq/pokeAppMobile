@@ -1,17 +1,39 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title>Tab 2 - Batalha Pokémon</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-button expand="block" (click)="procurarDesafiante()">Iniciar Batalha</ion-button>
+
+  <div *ngIf="pokemonPrimeiraAba && pokemonDesafiante" class="battle-cards">
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ pokemonPrimeiraAba.name | titlecase }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <img [src]="pokemonPrimeiraAba.sprites.front_default" alt="pokemon 1">
+        <p>Habilidades: {{ pokemonPrimeiraAba.abilities.length }}</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ pokemonDesafiante.name | titlecase }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <img [src]="pokemonDesafiante.sprites.front_default" alt="pokemon 2">
+        <p>Habilidades: {{ pokemonDesafiante.abilities.length }}</p>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+  <ion-text color="primary" *ngIf="vencedor">
+    <h2>{{ vencedor }}</h2>
+  </ion-text>
+
 </ion-content>

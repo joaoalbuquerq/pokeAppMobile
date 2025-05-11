@@ -1,0 +1,10 @@
+.battle-cards {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+ion-card {
+  flex: 1 1 45%;
+}

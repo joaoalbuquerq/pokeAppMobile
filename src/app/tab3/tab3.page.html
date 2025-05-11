@@ -1,15 +1,26 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Pokedex
-    </ion-title>
+    <ion-title>Pokémon List</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Pokedex</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+
+  <div class="grid">
+    <ion-card *ngFor="let pokemon of pokemons">
+      <ion-card-header>
+        <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <img [src]="pokemon.image" alt="{{ pokemon.name }}">
+        
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div class="pagination-buttons">
+    <ion-button [disabled]="offset === 0" (click)="voltar()">Anterior</ion-button>
+    <ion-button [disabled]="offset + limit >= totalPokemons" (click)="avancar()">Próxima</ion-button>
+  </div>
+
 </ion-content>
